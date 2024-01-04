@@ -14,9 +14,8 @@
 <body>
 <div class="container">
     <h1>Place your order</h1>
-    <?php  ?>
-    <?php
-   <nav>
+    <?php // Navigation for when you need it ?>
+    <nav>
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link active" href="?food=1">Order food</a>
@@ -26,7 +25,7 @@
             </li>
         </ul>
     </nav>
-     ?>
+    <?php // End of Navigation ?>
 
     <form action="./index.php" method="POST">
         <div class="form-row">
