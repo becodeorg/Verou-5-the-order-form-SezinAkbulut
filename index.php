@@ -40,10 +40,105 @@ function validate()
 
 function handleForm($products)
 {
+
+    // Initialize variables to store form data and error messages
+    $formData = [
+        'email' => '',
+        'street' => '',
+        'streetnumber' => '',
+        'city' => '',
+        'zipcode' => '',
+        'products' => [],
+    ];
+
+    $errors = [];
+
+    // Initialize variables to store form data and error messages
+    $formData = [
+        'email' => '',
+        'street' => '',
+        'streetnumber' => '',
+        'city' => '',
+        'zipcode' => '',
+        'products' => [],
+    ];
+
+    $errors = [];
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Validate email
+        $formData['email'] = htmlspecialchars($_POST["email"]);
+        if (empty($formData['email']) || !filter_var($formData['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Invalid email address';
+        }
+
+        // Validate street
+        $formData['street'] = htmlspecialchars($_POST["street"]);
+        if (empty($formData['street'])) {
+            $errors[] = 'Street is required';
+        }
+
+        // Validate street number
+        $formData['streetnumber'] = htmlspecialchars($_POST["streetnumber"]);
+        if (empty($formData['streetnumber'])) {
+            $errors[] = 'Street number is required';
+        }
+
+        // Validate city
+        $formData['city'] = htmlspecialchars($_POST["city"]);
+        if (empty($formData['city'])) {
+            $errors[] = 'City is required';
+        }
+
+        // Validate zip code
+        $formData['zipcode'] = htmlspecialchars($_POST["zipcode"]);
+        if (!ctype_digit($formData['zipcode'])) {
+            $errors[] = 'Zipcode should contain only numbers';
+        }
+
+        // Validate selected products
+        $formData['products'] = $_POST["products"] ?? [];
+        if (empty($formData['products'])) {
+            $errors[] = 'Select at least one product';
+        }
+
+        // If there are no errors, display the submitted data
+        if (empty($errors)) {
+            echo "Your order is submitted:";
+            echo "<br>";
+
+            // Get the indices of selected products
+            $selectedIndices = array_keys($formData['products']);
+
+            // Iterate through selected indices and display corresponding product names
+            foreach ($selectedIndices as $productIndex) {
+                if (isset($products[$productIndex])) {
+                    echo $products[$productIndex]['name'] . "<br>";
+                }
+            }
+            echo "<br>";
+            echo $formData['street'] . "<br>";
+            echo $formData['streetnumber'] . "<br>";
+            echo $formData['city'] . "<br>";
+            echo $formData['zipcode'] . "<br>";
+            echo $formData['email'];
+        }
+    }
+// Display error messages at the top of the form
+    if (!empty($errors)) {
+        echo '<div class="alert alert-danger" role="alert">';
+        echo '<strong>Error!</strong> Please fix the following issues:<br>';
+        foreach ($errors as $error) {
+            echo '- ' . $error . '<br>';
+        }
+        echo '</div>';
+    }
+
+
     // TODO: form related tasks (step 1)
     //var_dump($_SERVER["REQUEST_METHOD"]);
 
-
+/*
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = htmlspecialchars($_POST["email"]);
         $street = htmlspecialchars($_POST["street"]);
@@ -82,7 +177,7 @@ function handleForm($products)
         echo $email;
 }
 
-
+*/
     // Validation (step 2)
     $invalidFields = validate();
     if (!empty($invalidFields)) {
