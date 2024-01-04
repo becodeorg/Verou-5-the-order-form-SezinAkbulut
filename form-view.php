@@ -27,7 +27,7 @@
     </nav>
     <?php // End of Navigation ?>
 
-    <form action="./index.php" method="POST">
+    <form action="./index.php" method="POST" id="orderForm">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
@@ -73,6 +73,7 @@
                         <div class="invalid-feedback"><?php echo $errors['zipcode']; ?></div>
                     <?php endif; ?>
                 </div>
+
             </div>
         </fieldset>
 
@@ -85,11 +86,13 @@
                     &euro; <?= number_format($product['price'], 2) ?></label><br />
             <?php endforeach; ?>
         </fieldset>
+        <input type="hidden" id="totalValue" name="totalValue" value="<?php echo $totalValue; ?>">
 
         <button type="submit" class="btn btn-primary">Order!</button>
     </form>
 
-    <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>
+
+
 </div>
 
 <style>

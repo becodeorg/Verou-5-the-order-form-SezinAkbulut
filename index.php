@@ -53,6 +53,16 @@ function handleForm($products)
 
     $errors = [];
 
+    function calculateTotal($selectedProducts, $products)
+    {
+        foreach ($selectedProducts as $productIndex => $value) {
+            if (isset($products[$productIndex])) {
+                $totalValue += $products[$productIndex]['price'];
+            }
+        }
+
+        return $totalValue;
+    }
 
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -92,8 +102,9 @@ function handleForm($products)
             $errors[] = 'Select at least one product';
         }
 
-        // If there are no errors, display the submitted data
+        // Inside the handleForm function, after validating and before displaying the order details
         if (empty($errors)) {
+            // Display the submitted data
             echo "Your order is submitted:";
             echo "<br>";
 
@@ -103,17 +114,26 @@ function handleForm($products)
             // Iterate through selected indices and display corresponding product names
             foreach ($selectedIndices as $productIndex) {
                 if (isset($products[$productIndex])) {
-                    echo $products[$productIndex]['name'] . "<br>";
+                    $productName = $products[$productIndex]['name'];
+                    $productPrice = $products[$productIndex]['price'];
+
+                    echo $productName . " - &euro;" . number_format($productPrice, 2) . "<br>";
                 }
             }
+
             echo "<br>";
+            // Calculate and display the total value in the footer
+            $totalValue = calculateTotal($formData['products'], $products);
+            echo "<footer>You already ordered <strong>&euro; " . number_format($totalValue, 2) . "</strong> in food and drinks.</footer>";
+            // Display other details like street, street number, city, zipcode, and email
             echo $formData['street'] . "<br>";
             echo $formData['streetnumber'] . "<br>";
             echo $formData['city'] . "<br>";
             echo $formData['zipcode'] . "<br>";
-            echo $formData['email'];
-        }
+            echo $formData['email'] . "<br>";
 
+
+        }
     }
 
 // Display error messages at the top of the form
@@ -131,6 +151,7 @@ function handleForm($products)
             echo '- ' . $error . '<br>';
         }
         echo '</div>';
+
     }
 
 
