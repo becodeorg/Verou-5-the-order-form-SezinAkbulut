@@ -27,11 +27,11 @@
         </ul>
     </nav>
     */ ?>
-    <form method="POST">
+    <form action="./index.php" method="POST">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" class="form-control"/>
+                <input required type="email" id="email" name="email" class="form-control"/>
             </div>
             <div></div>
         </div>
