@@ -14,9 +14,9 @@
 <body>
 <div class="container">
     <h1>Place your order</h1>
-    <?php // Navigation for when you need it ?>
-    <?php /*
-    <nav>
+    <?php  ?>
+    <?php
+   <nav>
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link active" href="?food=1">Order food</a>
@@ -26,14 +26,15 @@
             </li>
         </ul>
     </nav>
-    */ ?>
+     ?>
+
     <form action="./index.php" method="POST">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
-                <input required type="email" id="email" name="email" class="form-control <?php echo (!empty($errors) && !empty($errors['email'])) ? 'is-invalid' : ''; ?>" value="<?php echo $formData['email']; ?>"/>
+                <input required type="email" id="email" name="email" class="form-control <?php echo (!empty($errors) && !empty($errors['email'])) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_SESSION['user_data']['email']) ? $_SESSION['user_data']['email'] : ''; ?>"/>
                 <?php if (!empty($errors) && !empty($errors['email'])): ?>
-                    <div class="invalid-feedback"><?php echo $errors['email']; ?>Please provide a valid zip.</div>
+                    <div class="invalid-feedback"><?php echo $errors['email']; ?></div>
                 <?php endif; ?>
             </div>
             <div></div>
@@ -45,21 +46,33 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="street">Street:</label>
-                    <input  required type="text" name="street" id="street" class="form-control">
+                    <input  required type="text" name="street" id="street" class="form-control <?php echo (!empty($errors) && !empty($errors['street'])) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_SESSION['user_data']['street']) ? $_SESSION['user_data']['street'] : ''; ?>"">
+                    <?php if (!empty($errors) && !empty($errors['street'])): ?>
+                        <div class="invalid-feedback"><?php echo $errors['street']; ?></div>
+                    <?php endif; ?>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="streetnumber">Street number:</label>
-                    <input  required type="text" id="streetnumber" name="streetnumber" class="form-control">
+                    <input  required type="text" id="streetnumber" name="streetnumber" class="form-control <?php echo (!empty($errors) && !empty($errors['streetnumber'])) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_SESSION['user_data']['streetnumber']) ? $_SESSION['user_data']['streetnumber'] : ''; ?>"">
+                    <?php if (!empty($errors) && !empty($errors['streetnumber'])): ?>
+                        <div class="invalid-feedback"><?php echo $errors['streetnumber']; ?></div>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="city">City:</label>
-                    <input  required type="text" id="city" name="city" class="form-control">
+                    <input  required type="text" id="city" name="city" class="form-control <?php echo (!empty($errors) && !empty($errors['city'])) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_SESSION['user_data']['city']) ? $_SESSION['user_data']['city'] : ''; ?>"">
+                    <?php if (!empty($errors) && !empty($errors['city'])): ?>
+                        <div class="invalid-feedback"><?php echo $errors['city']; ?></div>
+                    <?php endif; ?>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="zipcode">Zipcode</label>
-                    <input  required type="text" id="zipcode" name="zipcode" class="form-control">
+                    <input  required type="text" id="zipcode" name="zipcode" class="form-control <?php echo (!empty($errors) && !empty($errors['zipcode'])) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_SESSION['user_data']['zipcode']) ? $_SESSION['user_data']['zipcode'] : ''; ?>"">
+                    <?php if (!empty($errors) && !empty($errors['zipcode'])): ?>
+                        <div class="invalid-feedback"><?php echo $errors['zipcode']; ?></div>
+                    <?php endif; ?>
                 </div>
             </div>
         </fieldset>

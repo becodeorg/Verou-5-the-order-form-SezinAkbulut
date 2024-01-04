@@ -53,17 +53,7 @@ function handleForm($products)
 
     $errors = [];
 
-    // Initialize variables to store form data and error messages
-    $formData = [
-        'email' => '',
-        'street' => '',
-        'streetnumber' => '',
-        'city' => '',
-        'zipcode' => '',
-        'products' => [],
-    ];
 
-    $errors = [];
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Validate email
@@ -123,9 +113,18 @@ function handleForm($products)
             echo $formData['zipcode'] . "<br>";
             echo $formData['email'];
         }
+
     }
+
 // Display error messages at the top of the form
     if (!empty($errors)) {
+        $_SESSION['user_data'] = [
+            'email' => $formData['email'],
+            'street' => $formData['street'],
+            'streetnumber' => $formData['streetnumber'],
+            'city' => $formData['city'],
+            'zipcode' => $formData['zipcode'],
+        ];
         echo '<div class="alert alert-danger" role="alert">';
         echo '<strong>Error!</strong> Please fix the following issues:<br>';
         foreach ($errors as $error) {
