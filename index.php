@@ -100,11 +100,11 @@ function whatIsHappening() {
 
 // TODO: provide some products (you may overwrite the example)
 $products = [
-    ['name' => 'Ice Tea', 'price' => 2.5],
-    ['name' => 'Sprite', 'price' => 2],
-    ['name' => 'Coca Cola', 'price' => 2.5],
-    ['name' => 'Spritz', 'price' => 3.7],
-    ['name' => 'Water', 'price' => 1],
+    ['name' => 'Margerita', 'price' => 2.5, 'img' =>"./images/pizza.jpg"],
+    ['name' => '4 Sessions', 'price' => 2, 'img' =>"./images/pizza.jpg"],
+    ['name' => 'Hawaii', 'price' => 2.5, 'img' =>"./images/pizza.jpg"],
+    ['name' => 'Barbeque', 'price' => 3.7, 'img' =>"./images/pizza.jpg"],
+    ['name' => 'Bolognese', 'price' => 1, 'img' =>"./images/pizza.jpg"],
 ];
 
 $foods = [
@@ -242,8 +242,9 @@ function handleForm($products)
                 if (isset($products[$productIndex])) {
                     $productName = $products[$productIndex]['name'];
                     $productPrice = $products[$productIndex]['price'];
+                    $productImage = $products[$productIndex]['img'];
 
-                    echo "<p>" . $productName . " - &euro;" . number_format($productPrice, 2) . "</p>";
+                    echo "<p>" . $productName . " - &euro;" . number_format($productPrice, 2) . $productImage . "</p>";
                 }
             }
 

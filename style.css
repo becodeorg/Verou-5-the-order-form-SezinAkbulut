@@ -32,11 +32,12 @@ h3{
 .logo{
     width: 10%;
     float: left;
+
 }
 
 nav{
     display: block;
-    line-height: 70px;
+    line-height: 40px;
     width: 100%;
     background-color: whitesmoke;
     padding:  0;
@@ -93,11 +94,12 @@ a:hover{
 }
 .img-responsive{
     width: 100%;
+    margin-top: -15%;
 }
 
 h1{
     color: #ff4757;
-    font-size: 2rem;
+    font-size: 3rem;
     margin-bottom: 2%;
     text-align: center;
 }
@@ -122,12 +124,25 @@ legend{
     margin-bottom: 1%;
     font-weight: bold;
 }
-
 #orderForm{
     width: 50%;
     margin: 0 auto;
     border: 1px solid white;
     padding: 3%;
     border-radius: 5px;
+    background-color: rgba(231, 231, 231, 0.61);
+}
+.product-label {
+    display: block;
+    overflow: hidden;
 }
 
+.product-info {
+    float: left;
+    margin-right: 10px;
+}
+.product-image{
+    float: right;
+    max-width: 100px;
+    height: auto;
+}

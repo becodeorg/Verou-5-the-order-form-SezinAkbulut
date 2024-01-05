@@ -78,10 +78,15 @@
         <div>
             <legend>Products</legend>
             <?php foreach ($products as $i => $product): ?>
-                <label>
-					<?php // <?= is equal to <?php echo ?>
-                    <input type="checkbox" value="1" name="products[<?php echo $i ?>]"/> <?php echo $product['name'] ?> -
-                    &euro; <?= number_format($product['price'], 2) ?></label><br />
+                <label class="product-label">
+                    <input class="product-info" type="checkbox" value="1" name="products[<?php echo $i ?>]" />
+                    <img src="<?php echo $product['img']; ?>" alt="<?php echo $product['name']; ?>" class="product-image">
+                    <span class="product-info">
+                <span class="product-name"><?php echo $product['name'] ?></span> -
+                &euro; <?= number_format($product['price'], 2) ?>
+            </span>
+                </label><br />
+
             <?php endforeach; ?>
         </div>
 
