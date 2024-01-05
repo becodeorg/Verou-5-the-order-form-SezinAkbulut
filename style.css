@@ -6,21 +6,24 @@ h4, p {
 }
 h4{
     color: #AE7544;
+    font-weight: bold;
 }
 h3{
     color: #AE7544;
     position: absolute;
     bottom: 0;
+    left: 25%;
 }
 .logo{
     width: 10%;
     float: left;
 }
+
 nav{
     display: block;
     line-height: 70px;
     width: 100%;
-    background-color: #ececec;
+    background-color: whitesmoke;
     padding:  0;
     margin-bottom: 2%;
 }
@@ -68,6 +71,11 @@ a:hover{
     margin: 0 auto;
 
 }
+.btn-submit{
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+}
 .img-responsive{
     width: 100%;
 }
@@ -81,6 +89,7 @@ h1{
 .confirmation {
     color: forestgreen;
     font-size: 2.5rem;
+    font-weight: bold;
 }
 legend{
     font-size: 1.5rem;

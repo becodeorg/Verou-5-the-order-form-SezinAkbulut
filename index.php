@@ -30,7 +30,6 @@
         width: 50%;
         margin: 0 auto;
         padding: 3%;
-
         display: flex;
     }
 
@@ -43,10 +42,20 @@
 
     .orderdetails,
     .adressdetails {
-
+        margin-bottom: 10%;
         border: 1px solid dimgray;
     }
-
+    .deliverytime{
+        width: 50%;
+        text-align: center;
+        padding-top: 20px;
+        margin: 0 auto;
+        background-color: wheat;
+    }
+    .btn-sbmt{
+        position: relative;
+        top:-4.5rem;
+    }
 
 </style>
 </head>
@@ -111,6 +120,14 @@ $products = [
     ['name' => 'Coca Cola', 'price' => 2.5],
     ['name' => 'Spritz', 'price' => 3.7],
     ['name' => 'Water', 'price' => 1],
+];
+
+$foods = [
+    ['name' => 'X', 'price' => 2.5],
+    ['name' => 'Y', 'price' => 2],
+    ['name' => 'Z', 'price' => 2.5],
+    ['name' => 'Q', 'price' => 3.7],
+    ['name' => 'A', 'price' => 1],
 ];
 
 $totalValue = 0;
@@ -217,15 +234,20 @@ function handleForm($products)
                 $_SESSION['duration'] = $defaultDeliveryTime * 60; // Default delivery time
             }
 
-            echo "<p>The expected delivery time: <strong>" . ($_SESSION['express_delivery'] || $expressDeliverySelected ? '45 minutes (Express)' : "{$defaultDeliveryTime} hours") . "</strong></p>";
 
 
-            echo "<br>";
+
+
+            echo "<p class='deliverytime'>The expected delivery time: <strong>". "<br>". ($_SESSION['express_delivery'] || $expressDeliverySelected ? '45 minutes (Express)' : "{$defaultDeliveryTime} hours") . " </strong><br>  + €5 </p>";
             echo '<div id="orderDetails" class="result">';
+
             echo '<div id="orderDetails" class="orderdetails">';
             echo "<h4>Order Details:</h4>";
             // Get the indices of selected products
             $selectedIndices = array_keys($formData['products']);
+
+            // Initialize express delivery cost
+            $expressDeliveryCost = $expressDeliverySelected ? 5 : 0;
 
             // Iterate through selected indices and display corresponding product names
             foreach ($selectedIndices as $productIndex) {
@@ -239,6 +261,7 @@ function handleForm($products)
 
 
             // Calculate and display the total value in the footer
+            // Update total amount for express delivery
             $totalValue = calculateTotal($formData['products'], $products);
 
             // Update total amount for express delivery
@@ -261,8 +284,8 @@ function handleForm($products)
             echo "<p>E-mail: " . $formData['email'] . "</p>";
             echo '</div>';
             echo '</div>';
-
-
+            echo "<button type='submit' name='submit' class='btn btn-sbmt btn-success'>OK</button>";
+            echo "<br>";
         }
     }
 
