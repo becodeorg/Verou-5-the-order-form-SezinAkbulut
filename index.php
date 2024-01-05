@@ -197,7 +197,6 @@ function handleForm($products)
 
             // Default delivery time
             $defaultDeliveryTime = 2;
-            echo "<p>The expected delivery time: <strong>{$defaultDeliveryTime} hours</strong></p>";
 
             // Initialize additional cost and time for express delivery
             $expressDeliveryCost = 5;
@@ -210,13 +209,13 @@ function handleForm($products)
 
             // Adjust the duration for express delivery
             if ($expressDeliverySelected) {
-              $_SESSION['express_delivery'] = true;
-              $_SESSION['duration'] = min($defaultDeliveryTime * 60 - $expressDeliveryTime, $defaultDeliveryTime * 60); // Express delivery in 45 minutes
+                $_SESSION['express_delivery'] = true;
+                $_SESSION['duration'] = min($defaultDeliveryTime * 60 - $expressDeliveryTime, $defaultDeliveryTime * 60); // Express delivery in 45 minutes
+            } else {
+                // If checkbox is not selected, set express delivery to false
+                $_SESSION['express_delivery'] = false;
+                $_SESSION['duration'] = $defaultDeliveryTime * 60; // Default delivery time
             }
-
-
-
-
 
             echo "<p>The expected delivery time: <strong>" . ($_SESSION['express_delivery'] || $expressDeliverySelected ? '45 minutes (Express)' : "{$defaultDeliveryTime} hours") . "</strong></p>";
 
