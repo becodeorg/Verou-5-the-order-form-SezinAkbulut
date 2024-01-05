@@ -84,12 +84,20 @@
                     &euro; <?= number_format($product['price'], 2) ?></label><br />
             <?php endforeach; ?>
         </div>
-        <button type="submit" class="btn btn-primary">Order!</button>
+
+    <br>
+    <form method='post'>
+        <label>The expected delivery time: 2 hours </label> <br>
+        <input type="checkbox" value="1" name="express_delivery"/> Express for delivery in 45 minute for &euro; 5 .</label><br>
+
+        <button class="btn btn-success" type='submit' name='update'>Update</button>
+        <br>
+        <button type="submit" class="btn btn-sbmt btn-primary">Order!</button>
     </form>
 
-    </div>
-
 </div>
+
+
 
 </body>
 </html>

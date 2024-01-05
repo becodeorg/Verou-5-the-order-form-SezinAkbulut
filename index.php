@@ -74,7 +74,6 @@
 </nav>
 <?php // End of Navigation ?>
 
-
 </div>
 
 </body>
@@ -90,6 +89,8 @@
 
 // We are going to use session variables so we need to enable sessions
 session_start();
+
+
 
 // Use this function when you need to need an overview of these variables
 function whatIsHappening() {
@@ -184,11 +185,42 @@ function handleForm($products)
             $errors[] = 'Select at least one product';
         }
 
+// Check if the user is updating express delivery
+        $updatingExpressDelivery = isset($_POST['update']);
+
         // Inside the handleForm function, after validating and before displaying the order details
-        if (empty($errors)) {
+        if (empty($errors) || $updatingExpressDelivery) {
             // Display the submitted data
-            echo "<h1 class='confirmation'>Your order is submitted:</h1>";
-            
+
+
+            echo "<h1 class='confirmation'>Confirm your order:</h1>";
+
+            // Default delivery time
+            $defaultDeliveryTime = 2;
+            echo "<p>The expected delivery time: <strong>{$defaultDeliveryTime} hours</strong></p>";
+
+            // Initialize additional cost and time for express delivery
+            $expressDeliveryCost = 5;
+            $expressDeliveryTime = 45;
+
+            // Check if the user opted for express delivery
+            $expressDeliverySelected = isset($_POST['express_delivery']);
+
+
+
+            // Adjust the duration for express delivery
+            if ($expressDeliverySelected) {
+              $_SESSION['express_delivery'] = true;
+              $_SESSION['duration'] = min($defaultDeliveryTime * 60 - $expressDeliveryTime, $defaultDeliveryTime * 60); // Express delivery in 45 minutes
+            }
+
+
+
+
+
+            echo "<p>The expected delivery time: <strong>" . ($_SESSION['express_delivery'] || $expressDeliverySelected ? '45 minutes (Express)' : "{$defaultDeliveryTime} hours") . "</strong></p>";
+
+
             echo "<br>";
             echo '<div id="orderDetails" class="result">';
             echo '<div id="orderDetails" class="orderdetails">';
@@ -209,7 +241,14 @@ function handleForm($products)
 
             // Calculate and display the total value in the footer
             $totalValue = calculateTotal($formData['products'], $products);
+
+            // Update total amount for express delivery
+            if ($_SESSION['express_delivery'] && $expressDeliverySelected) {
+                $totalValue += $expressDeliveryCost;
+            }
+
             echo "<h3>Total: <strong>&euro; " . number_format($totalValue, 2) . "</strong> </h3>";
+
 
             echo '</div>';
             echo "<br>";
@@ -228,8 +267,13 @@ function handleForm($products)
         }
     }
 
+
+
+
+// Check if the user is updating express delivery
+    $updatingExpressDelivery = isset($_POST['update']);
 // Display error messages at the top of the form
-    if (!empty($errors)) {
+    if (!empty($errors)  && !$updatingExpressDelivery) {
         $_SESSION['user_data'] = [
             'email' => $formData['email'],
             'street' => $formData['street'],
