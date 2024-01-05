@@ -1,4 +1,19 @@
-
+*{
+    margin: 0 0;
+    padding: 0 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    background-image: url(./images/flat-lay-arrangement-with-salad-box-sauce.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.container{
+    width: 100%;
+    margin: 0 auto;
+    padding: 1%;
+}
 h4, p {
     text-align: center;
     color: dimgrey;
@@ -111,7 +126,7 @@ legend{
 #orderForm{
     width: 50%;
     margin: 0 auto;
-    border: 1px solid dimgrey;
+    border: 1px solid white;
     padding: 3%;
     border-radius: 5px;
 }

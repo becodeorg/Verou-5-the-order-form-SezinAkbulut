@@ -10,22 +10,6 @@
     <link href="./style.css" rel="stylesheet">
     <title>Your fancy store</title>
 <style>
-    *{
-        margin: 0 0;
-        padding: 0 0;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    body{
-        background-image: url(./images/eco-friendly-disposable-paper-tableware-copy-space-arrangement.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-    .container{
-        width: 100%;
-        margin: 0 auto;
-        padding: 1%;
-    }
     .result{
         width: 50%;
         margin: 0 auto;
@@ -56,6 +40,7 @@
         position: relative;
         top:-4.5rem;
     }
+
 
 </style>
 </head>
@@ -131,6 +116,9 @@ $foods = [
 ];
 
 $totalValue = 0;
+
+
+
 
 function validate()
 {
@@ -286,10 +274,53 @@ function handleForm($products)
             echo '</div>';
             echo "<button type='submit' name='submit' class='btn btn-sbmt btn-success'>OK</button>";
             echo "<br>";
+
+            updateStatistics($formData['products'], $products);
+
+            if (isset($_POST['submit'])) {
+                echo "<p>Your order is on the way!</p>";
+            }
         }
     }
 
+// Function to update statistics
+    function updateStatistics($selectedProducts, $allProducts)
+    {
+        global $totalValue, $totalNumberOfProducts, $topProduct, $orders;
 
+        // Calculate total value
+        $totalValue += calculateTotal($selectedProducts, $allProducts);
+
+        // Update total number of products
+        $totalNumberOfProducts += count($selectedProducts);
+
+        // Update top product
+        $topProduct = getTopProduct($selectedProducts, $allProducts);
+
+        // Update orders
+        updateOrders($selectedProducts);
+    }
+
+// Function to update orders
+    function updateOrders($selectedProducts)
+    {
+        global $orders;
+
+        // Update orders with selected products
+        foreach ($selectedProducts as $productIndex => $value) {
+            if (isset($orders[$productIndex])) {
+                $orders[$productIndex]['amount'] += 1;
+            } else {
+                $orders[$productIndex] = [
+                    'product' => $productIndex,
+                    'amount' => 1,
+                ];
+            }
+        }
+
+        // Save orders in the session
+        $_SESSION['orders'] = $orders;
+    }
 
 
 // Check if the user is updating express delivery
@@ -311,6 +342,7 @@ function handleForm($products)
         echo '</div>';
 
     }
+
 
 
     // TODO: form related tasks (step 1)
