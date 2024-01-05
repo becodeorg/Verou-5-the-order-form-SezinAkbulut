@@ -1,10 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css"
+          rel="stylesheet"/>
+    <link href="./style.css" rel="stylesheet">
+    <title>Your fancy store</title>
+<style>
+    *{
+        margin: 0 0;
+        padding: 0 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    body{
+        background-image: url(./images/eco-friendly-disposable-paper-tableware-copy-space-arrangement.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .container{
+        width: 100%;
+        margin: 0 auto;
+        padding: 1%;
+    }
+    .result{
+        width: 50%;
+        margin: 0 auto;
+        padding: 3%;
+
+        display: flex;
+    }
+
+    #orderDetails {
+        width: 50%;
+        position: relative;
+        padding: 20px;
+        background-color: wheat;
+    }
+
+    .orderdetails,
+    .adressdetails {
+
+        border: 1px solid dimgray;
+    }
+
+
+</style>
+</head>
+<body>
+<div class="container">
+<?php // Navigation for when you need it ?>
+
+<div class="logo">
+    <a href="#" title="Logo">
+        <img src="./images/logo.png" alt="Restaurant Logo" class="img-responsive">
+    </a>
+</div>
+
+<nav>
+    <div class="menu">
+        <ul class="nav ">
+            <li class="nav-item">
+                <a class="nav-link active" href="./food.php">Order food</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./drinks.php">Order drinks</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<?php // End of Navigation ?>
+
+
+</div>
+
+</body>
+</html>
 <?php
+
 
 // This file is your starting point (= since it's the index)
 // It will contain most of the logic, to prevent making a messy mix in the html
 
 // This line makes PHP behave in a more strict way
-declare(strict_types=1);
+
 
 // We are going to use session variables so we need to enable sessions
 session_start();
@@ -105,9 +187,12 @@ function handleForm($products)
         // Inside the handleForm function, after validating and before displaying the order details
         if (empty($errors)) {
             // Display the submitted data
-            echo "Your order is submitted:";
+            echo "<h1 class='confirmation'>Your order is submitted:</h1>";
+            
             echo "<br>";
-
+            echo '<div id="orderDetails" class="result">';
+            echo '<div id="orderDetails" class="orderdetails">';
+            echo "<h4>Order Details:</h4>";
             // Get the indices of selected products
             $selectedIndices = array_keys($formData['products']);
 
@@ -117,20 +202,27 @@ function handleForm($products)
                     $productName = $products[$productIndex]['name'];
                     $productPrice = $products[$productIndex]['price'];
 
-                    echo $productName . " - &euro;" . number_format($productPrice, 2) . "<br>";
+                    echo "<p>" . $productName . " - &euro;" . number_format($productPrice, 2) . "</p>";
                 }
             }
 
-            echo "<br>";
+
             // Calculate and display the total value in the footer
             $totalValue = calculateTotal($formData['products'], $products);
-            echo "<footer>You already ordered <strong>&euro; " . number_format($totalValue, 2) . "</strong> in food and drinks.</footer>";
+            echo "<h3>Total: <strong>&euro; " . number_format($totalValue, 2) . "</strong> </h3>";
+
+            echo '</div>';
+            echo "<br>";
+            echo '<div id="orderDetails" class="adressdetails">';
+            echo "<h4>Adress Details:</h4>";
             // Display other details like street, street number, city, zipcode, and email
-            echo $formData['street'] . "<br>";
-            echo $formData['streetnumber'] . "<br>";
-            echo $formData['city'] . "<br>";
-            echo $formData['zipcode'] . "<br>";
-            echo $formData['email'] . "<br>";
+            echo "<p>Street: " . $formData['street'] . "</p>";
+            echo "<p>Street number: " . $formData['streetnumber'] . "</p>";
+            echo "<p>City: " . $formData['city'] . "</p>";
+            echo "<p>Zipcode: " . $formData['zipcode'] . "</p>";
+            echo "<p>E-mail: " . $formData['email'] . "</p>";
+            echo '</div>';
+            echo '</div>';
 
 
         }
@@ -214,3 +306,4 @@ if ($formSubmitted) {
 }
 
 require 'form-view.php';
+?>

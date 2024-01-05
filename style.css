@@ -1,0 +1,103 @@
+
+h4, p {
+    text-align: center;
+    color: dimgrey;
+
+}
+h4{
+    color: #AE7544;
+}
+h3{
+    color: #AE7544;
+    position: absolute;
+    bottom: 0;
+}
+.logo{
+    width: 10%;
+    float: left;
+}
+nav{
+    display: block;
+    line-height: 70px;
+    width: 100%;
+    background-color: #ececec;
+    padding:  0;
+    margin-bottom: 2%;
+}
+ul.nav {
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: #ff6b81;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover{
+    color: #ff4757;
+}
+.btn{
+    padding: 1%;
+    border: none;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+.btn-primary{
+    background-color: #ff6b81;
+    color: white;
+    cursor: pointer;
+}
+.btn-primary:hover{
+    color: white;
+    background-color: #ff4757;
+}
+.img-responsive{
+    width: 100%;
+}
+
+h1{
+    color: #ff4757;
+    font-size: 2rem;
+    margin-bottom: 2%;
+    text-align: center;
+}
+.confirmation {
+    color: forestgreen;
+    font-size: 2.5rem;
+}
+legend{
+    font-size: 1.5rem;
+    color: #ff4757;
+}
+.form-control{
+    width: 96%;
+    padding: 1%;
+    margin-bottom: 3%;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.order-label{
+    margin-bottom: 1%;
+    font-weight: bold;
+}
+
+#orderForm{
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid dimgrey;
+    padding: 3%;
+    border-radius: 5px;
+}
+
