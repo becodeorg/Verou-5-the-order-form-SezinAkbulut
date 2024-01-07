@@ -18,27 +18,40 @@
     }
 
     #orderDetails {
-        width: 50%;
+        width: 70%;
         position: relative;
         padding: 20px;
         background-color: wheat;
     }
-
     .orderdetails,
     .adressdetails {
         margin-bottom: 10%;
         border: 1px solid dimgray;
+        height: 700px;
+        display: block;
+    }
+    p.orderdetails,
+    p.adressdetails {
+        text-align: left;
+    }
+    .selected-product-image{
+        float: right;
+        margin-left: 10px;
+        max-width: 80px;
+    }
+    .product-img{
+        height: 100px;
     }
     .deliverytime{
         width: 50%;
         text-align: center;
-        padding-top: 20px;
         margin: 0 auto;
-        background-color: wheat;
+        position: relative;
+        top:-7rem;
     }
     .btn-sbmt{
-        position: relative;
-        top:-4.5rem;
+        margin-top: -4rem;
+        margin-bottom: 2rem;
     }
 
 
@@ -50,7 +63,7 @@
 
 <div class="logo">
     <a href="#" title="Logo">
-        <img src="./images/logo.png" alt="Restaurant Logo" class="img-responsive">
+        <img src="./images/logo.png" alt="Restaurant Logo" class="img-responsive-1">
     </a>
 </div>
 
@@ -58,10 +71,16 @@
     <div class="menu">
         <ul class="nav ">
             <li class="nav-item">
-                <a class="nav-link active" href="./food.php">Order food</a>
+                <a class="nav-link" href="./index.php">Order</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./drinks.php">Order drinks</a>
+                <a class="nav-link active" href="./food.php">Food</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./drinks.php">Drinks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./index.html">Home</a>
             </li>
         </ul>
     </div>
@@ -226,7 +245,7 @@ function handleForm($products)
 
 
 
-            echo "<p class='deliverytime'>The expected delivery time: <strong>". "<br>". ($_SESSION['express_delivery'] || $expressDeliverySelected ? '45 minutes (Express)' : "{$defaultDeliveryTime} hours") . " </strong><br>  + €5 </p>";
+
             echo '<div id="orderDetails" class="result">';
 
             echo '<div id="orderDetails" class="orderdetails">';
@@ -244,7 +263,7 @@ function handleForm($products)
                     $productPrice = $products[$productIndex]['price'];
                     $productImage = $products[$productIndex]['img'];
 
-                    echo "<p>" . $productName . " - &euro;" . number_format($productPrice, 2) . $productImage . "</p>";
+                    echo "<p class='product-img'>" . $productName . " - &euro;" . number_format($productPrice, 2) . "<img src='{$productImage}' alt='{$productName}' class='selected-product-image'></p>";
                 }
             }
 
@@ -266,14 +285,16 @@ function handleForm($products)
             echo '<div id="orderDetails" class="adressdetails">';
             echo "<h4>Adress Details:</h4>";
             // Display other details like street, street number, city, zipcode, and email
-            echo "<p>Street: " . $formData['street'] . "</p>";
-            echo "<p>Street number: " . $formData['streetnumber'] . "</p>";
-            echo "<p>City: " . $formData['city'] . "</p>";
-            echo "<p>Zipcode: " . $formData['zipcode'] . "</p>";
-            echo "<p>E-mail: " . $formData['email'] . "</p>";
+            echo "<p> <strong>Street:</strong> " . $formData['street'] . "</p>";
+            echo "<p> <strong>Street number:</strong> " . $formData['streetnumber'] . "</p>";
+            echo "<p> <strong>City: </strong>" . $formData['city'] . "</p>";
+            echo "<p> <strong>Zipcode: </strong>" . $formData['zipcode'] . "</p>";
+            echo "<p> <strong>E-mail: </strong>" . $formData['email'] . "</p>";
             echo '</div>';
             echo '</div>';
-            echo "<button type='submit' name='submit' class='btn btn-sbmt btn-success'>OK</button>";
+            echo "<br>";
+            echo "<p class='deliverytime'>The expected delivery time: <strong>". "<br>". ($_SESSION['express_delivery'] || $expressDeliverySelected ? '45 minutes (Express)' . "<br>" . "&euro;" . $expressDeliveryCost : "{$defaultDeliveryTime} hours") . "  </strong> </p>";
+            echo "<button type='submit' name='submit' class='btn btn-sbmt btn-success'>ORDER</button>";
             echo "<br>";
 
             updateStatistics($formData['products'], $products);

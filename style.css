@@ -13,9 +13,10 @@ body{
     width: 100%;
     margin: 0 auto;
     padding: 1%;
+
 }
 h4, p {
-    text-align: center;
+    text-align: left;
     color: dimgrey;
 
 }
@@ -94,6 +95,10 @@ a:hover{
 }
 .img-responsive{
     width: 100%;
+    margin-top: -5%;
+}
+.img-responsive-1{
+    width: 100%;
     margin-top: -15%;
 }
 
@@ -102,6 +107,19 @@ h1{
     font-size: 3rem;
     margin-bottom: 2%;
     text-align: center;
+    font-weight: bold;
+}
+h2{
+    color: #ff4757;
+    font-size: 2rem;
+    margin-bottom: 2%;
+    text-align: center;
+}
+footer p{
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin-top: 20px;
 }
 .confirmation {
     color: forestgreen;
@@ -145,4 +163,133 @@ legend{
     float: right;
     max-width: 100px;
     height: auto;
+}
+
+.result{
+    width: 50%;
+    margin: 0 auto;
+    padding: 3%;
+    display: flex;
+}
+
+#orderDetails {
+    width: 70%;
+    position: relative;
+    padding: 20px;
+    background-color: wheat;
+}
+.orderdetails,
+.adressdetails {
+    margin-bottom: 10%;
+    border: 1px solid dimgray;
+    height: 700px;
+    display: block;
+}
+p.orderdetails,
+p.adressdetails {
+    text-align: left;
+}
+.selected-product-image{
+    float: right;
+    margin-left: 10px;
+    max-width: 80px;
+}
+.product-img{
+    height: 100px;
+}
+.deliverytime{
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+    top:-7rem;
+}
+.btn-sbmt{
+    margin-top: -4rem;
+    margin-bottom: 2rem;
+}
+/*home*/
+.categories{
+    padding: 10% 0;
+}
+.categories .container {
+    text-align: center;
+}
+.box-3{
+
+    display: inline-block;
+    margin: 0 15px; /* Adjust the margin value as needed */
+    text-align: left;
+}
+.food-menu{
+
+   margin: 0 auto;
+    margin-left: 4rem;
+}
+.food-menu-box{
+    width: 43%;
+    margin: 1%;
+    padding: 2%;
+    float: left;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.food-menu-img{
+    width: 20%;
+    float: left;
+}
+
+.food-menu-desc{
+    width: 70%;
+    float: left;
+    margin-left: 8%;
+}
+
+.food-price{
+    font-size: 1.2rem;
+    margin: 2% 0;
+}
+.food-detail{
+    font-size: 1rem;
+    color: #747d8c;
+}
+span{
+    font-size: 1.5rem;
+}
+.img-curve{
+    border-radius: 15px;
+}
+.text-right{
+    text-align: right;
+}
+.text-center{
+    text-align: center;
+    margin-right: 5rem;
+}
+.text-left{
+    text-align: left;
+}
+.text-white{
+    color: white;
+}
+
+.clearfix{
+    clear: both;
+    float: none;
+}
+.float-container{
+    position: relative;
+}
+.float-text{
+    position: absolute;
+    bottom: 30px;
+    left: 40%;
+    font-weight: bold;
+}
+fieldset{
+    border: 1px solid white;
+    margin: 5%;
+    padding: 3%;
+    border-radius: 5px;
 }

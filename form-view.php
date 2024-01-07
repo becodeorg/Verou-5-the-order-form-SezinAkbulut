@@ -16,10 +16,6 @@
 <body>
 <div class="container">
 
-
-
-
-
     <h1>Place your order</h1>
     <div>
 
@@ -101,7 +97,7 @@
 
 <br>
     <footer>
-        <h1>Statistics:</h1>
+        <h2>Statistics:</h2>
         <p>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in drinks and foods.</p>
         <p>You ordered a total of <strong><?= $totalNumberOfProducts ?></strong> products.</p>
         <p>Your top product is <strong><?= $topProduct["name"] ?></strong>.</p>
