@@ -170,6 +170,7 @@ legend{
     margin: 0 auto;
     padding: 3%;
     display: flex;
+    border-radius:50px;
 }
 
 #orderDetails {
@@ -177,6 +178,7 @@ legend{
     position: relative;
     padding: 20px;
     background-color: wheat;
+
 }
 .orderdetails,
 .adressdetails {
@@ -184,6 +186,7 @@ legend{
     border: 1px solid dimgray;
     height: 700px;
     display: block;
+
 }
 p.orderdetails,
 p.adressdetails {

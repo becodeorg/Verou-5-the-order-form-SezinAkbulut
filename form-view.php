@@ -19,7 +19,7 @@
     <h1>Place your order</h1>
     <div>
 
-    <form action="./index.php" method="POST" id="orderForm">
+    <form method="POST" id="orderForm">
 
         <div class="form-row justify-content-center"">
             <div class="form-group col-md-6">
@@ -78,8 +78,8 @@
                     <input class="product-info" type="checkbox" value="1" name="products[<?php echo $i ?>]" />
                     <img src="<?php echo $product['img']; ?>" alt="<?php echo $product['name']; ?>" class="product-image">
                     <span class="product-info">
-                <span class="product-name"><?php echo $product['name'] ?></span> -
-                &euro; <?= number_format($product['price'], 2) ?>
+                <span class="product-name"><?php echo $product['name'] ?></span> - <span class="food-price">
+                &euro; <?= number_format($product['price'], 2) ?></span>
             </span>
                 </label><br />
 
@@ -87,7 +87,7 @@
         </div>
 
     <br>
-    <form method='post'>
+    <form method='post' action="confirmation.php">
         <label for="express_delivery">The expected delivery time: 2 hours </label> <br>
         <input type="checkbox" value="1" name="express_delivery" id="express_delivery"/> Express for delivery in 45 minute for &euro; 5 .</label><br>
 
@@ -96,15 +96,14 @@
     </form>
 
 <br>
-    <footer>
-        <h2>Statistics:</h2>
-        <p>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in drinks and foods.</p>
-        <p>You ordered a total of <strong><?= $totalNumberOfProducts ?></strong> products.</p>
-        <p>Your top product is <strong><?= $topProduct["name"] ?></strong>.</p>
-    </footer>
+
 </div>
 
 
 
 </body>
 </html>
+
+
+
+

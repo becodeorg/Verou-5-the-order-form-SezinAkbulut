@@ -9,100 +9,115 @@
           rel="stylesheet"/>
     <link href="./style.css" rel="stylesheet">
     <title>Your fancy store</title>
-<style>
-    .result{
-        width: 50%;
-        margin: 0 auto;
-        padding: 3%;
-        display: flex;
-    }
+    <style>
+        .result{
+            width: 50%;
+            margin: 0 auto;
+            padding: 3%;
+            display: flex;
+        }
 
-    #orderDetails {
-        width: 70%;
-        position: relative;
-        padding: 20px;
-        background-color: wheat;
-    }
-    .orderdetails,
-    .adressdetails {
-        margin-bottom: 10%;
-        border: 1px solid dimgray;
-        height: 700px;
-        display: block;
-    }
-    p.orderdetails,
-    p.adressdetails {
-        text-align: left;
-    }
-    .selected-product-image{
-        float: right;
-        margin-left: 10px;
-        max-width: 80px;
-    }
-    .product-img{
-        height: 100px;
-    }
-    .deliverytime{
-        width: 50%;
-        text-align: center;
-        margin: 0 auto;
-        position: relative;
-        top:-7rem;
-    }
-    .btn-sbmt{
-        margin-top: -4rem;
-        margin-bottom: 2rem;
-    }
-
-
-</style>
+        #orderDetails {
+            width: 70%;
+            position: relative;
+            padding: 20px;
+            background-color: wheat;
+            border-radius: %60;
+        }
+        .orderdetails,
+        .adressdetails {
+            margin-bottom: 10%;
+            border: 1px solid dimgray;
+            height: 700px;
+            border-radius: %60;
+            display: block;
+        }
+        p.orderdetails,
+        p.adressdetails {
+            text-align: left;
+        }
+        .selected-product-image{
+            float: right;
+            margin-left: 10px;
+            max-width: 80px;
+        }
+        .product-img{
+            height: 100px;
+        }
+        .deliverytime{
+            width: 50%;
+            text-align: center;
+            margin: 0 auto;
+            position: relative;
+            top:-7rem;
+        }
+        .btn-sbmt{
+            margin-top: -4rem;
+            margin-bottom: 2rem;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-<?php // Navigation for when you need it ?>
+    <?php // Navigation for when you need it ?>
 
-<div class="logo">
-    <a href="#" title="Logo">
-        <img src="./images/logo.png" alt="Restaurant Logo" class="img-responsive-1">
-    </a>
-</div>
-
-<nav>
-    <div class="menu">
-        <ul class="nav ">
-            <li class="nav-item">
-                <a class="nav-link" href="./index.php">Order</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="./food.php">Food</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./drinks.php">Drinks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./index.html">Home</a>
-            </li>
-        </ul>
+    <div class="logo">
+        <a href="#" title="Logo">
+            <img src="./images/logo.png" alt="Restaurant Logo" class="img-responsive-1">
+        </a>
     </div>
-</nav>
-<?php // End of Navigation ?>
+
+    <nav>
+        <div class="menu">
+            <ul class="nav ">
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.php">Order</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <?php // End of Navigation ?>
 
 </div>
-
 </body>
 </html>
+
 <?php
-
-
 // This file is your starting point (= since it's the index)
 // It will contain most of the logic, to prevent making a messy mix in the html
 
 // This line makes PHP behave in a more strict way
-
+//declare(strict_types=1);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 // We are going to use session variables so we need to enable sessions
 session_start();
 
+//farklı sayfalardaki ürünleri çekmek için kulllanılabilir
+//datayı depolayabilir ve kullanabilirsin
+
+//dump and die function
+
+/*
+ function dd (array $array) {
+    echo "<pre>;
+    var_dump ($array);
+    echo "</pre>";
+die();
+}
+
+vam_dump($_POST;)
+
+*/
 
 
 // Use this function when you need to need an overview of these variables
@@ -117,6 +132,9 @@ function whatIsHappening() {
     var_dump($_SESSION);
 }
 
+
+
+
 // TODO: provide some products (you may overwrite the example)
 $products = [
     ['name' => 'Margerita', 'price' => 2.5, 'img' =>"./images/pizza.jpg"],
@@ -126,18 +144,9 @@ $products = [
     ['name' => 'Bolognese', 'price' => 1, 'img' =>"./images/pizza.jpg"],
 ];
 
-$foods = [
-    ['name' => 'X', 'price' => 2.5],
-    ['name' => 'Y', 'price' => 2],
-    ['name' => 'Z', 'price' => 2.5],
-    ['name' => 'Q', 'price' => 3.7],
-    ['name' => 'A', 'price' => 1],
-];
+
 
 $totalValue = 0;
-
-
-
 
 function validate()
 {
@@ -160,7 +169,7 @@ function handleForm($products)
 
     $errors = [];
 
-    function calculateTotal($selectedProducts, $products)
+    function calculateTotal($selectedProducts, $products, $totalValue)
     {
         foreach ($selectedProducts as $productIndex => $value) {
             if (isset($products[$productIndex])) {
@@ -172,7 +181,8 @@ function handleForm($products)
     }
 
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        var_dump($_POST);
         // Validate email
         $formData['email'] = htmlspecialchars($_POST["email"]);
         if (empty($formData['email']) || !filter_var($formData['email'], FILTER_VALIDATE_EMAIL)) {
@@ -215,23 +225,22 @@ function handleForm($products)
         // Inside the handleForm function, after validating and before displaying the order details
         if (empty($errors) || $updatingExpressDelivery) {
             // Display the submitted data
-
-
+            // Display confirmation details
             echo "<h1 class='confirmation'>Confirm your order:</h1>";
 
-            // Default delivery time
+// Default delivery time
             $defaultDeliveryTime = 2;
 
-            // Initialize additional cost and time for express delivery
+// Initialize additional cost and time for express delivery
             $expressDeliveryCost = 5;
             $expressDeliveryTime = 45;
 
-            // Check if the user opted for express delivery
+// Check if the user opted for express delivery
             $expressDeliverySelected = isset($_POST['express_delivery']);
 
 
 
-            // Adjust the duration for express delivery
+// Adjust the duration for express delivery
             if ($expressDeliverySelected) {
                 $_SESSION['express_delivery'] = true;
                 $_SESSION['duration'] = min($defaultDeliveryTime * 60 - $expressDeliveryTime, $defaultDeliveryTime * 60); // Express delivery in 45 minutes
@@ -243,20 +252,17 @@ function handleForm($products)
 
 
 
-
-
-
             echo '<div id="orderDetails" class="result">';
 
             echo '<div id="orderDetails" class="orderdetails">';
             echo "<h4>Order Details:</h4>";
-            // Get the indices of selected products
+// Get the indices of selected products
             $selectedIndices = array_keys($formData['products']);
 
-            // Initialize express delivery cost
+// Initialize express delivery cost
             $expressDeliveryCost = $expressDeliverySelected ? 5 : 0;
 
-            // Iterate through selected indices and display corresponding product names
+// Iterate through selected indices and display corresponding product names
             foreach ($selectedIndices as $productIndex) {
                 if (isset($products[$productIndex])) {
                     $productName = $products[$productIndex]['name'];
@@ -268,11 +274,14 @@ function handleForm($products)
             }
 
 
-            // Calculate and display the total value in the footer
-            // Update total amount for express delivery
-            $totalValue = calculateTotal($formData['products'], $products);
 
-            // Update total amount for express delivery
+
+    // Calculate and display the total value in the footer
+    // Update total amount for express delivery
+            $totalValue = 0;
+            $totalValue = calculateTotal($formData['products'], $products, $totalValue);
+
+    // Update total amount for express delivery
             if ($_SESSION['express_delivery'] && $expressDeliverySelected) {
                 $totalValue += $expressDeliveryCost;
             }
@@ -284,7 +293,7 @@ function handleForm($products)
             echo "<br>";
             echo '<div id="orderDetails" class="adressdetails">';
             echo "<h4>Adress Details:</h4>";
-            // Display other details like street, street number, city, zipcode, and email
+// Display other details like street, street number, city, zipcode, and email
             echo "<p> <strong>Street:</strong> " . $formData['street'] . "</p>";
             echo "<p> <strong>Street number:</strong> " . $formData['streetnumber'] . "</p>";
             echo "<p> <strong>City: </strong>" . $formData['city'] . "</p>";
@@ -297,52 +306,27 @@ function handleForm($products)
             echo "<button type='submit' name='submit' class='btn btn-sbmt btn-success'>ORDER</button>";
             echo "<br>";
 
-            updateStatistics($formData['products'], $products);
+            
 
-            if (isset($_POST['submit'])) {
-                echo "<p>Your order is on the way!</p>";
-            }
+            $_SESSION['confirmationData'] = [
+                'formData' => $formData,
+                'totalValue' => $totalValue,
+                'expressDeliveryCost' => $expressDeliveryCost,
+                'express_delivery' => $expressDeliverySelected,
+                'products' => $products,
+            ];
+
+
+        // Redirect to confirmation.php
+            header("Location: confirmation.php");
+            exit;
         }
     }
 
-// Function to update statistics
-    function updateStatistics($selectedProducts, $allProducts)
-    {
-        global $totalValue, $totalNumberOfProducts, $topProduct, $orders;
 
-        // Calculate total value
-        $totalValue += calculateTotal($selectedProducts, $allProducts);
 
-        // Update total number of products
-        $totalNumberOfProducts += count($selectedProducts);
 
-        // Update top product
-        $topProduct = getTopProduct($selectedProducts, $allProducts);
 
-        // Update orders
-        updateOrders($selectedProducts);
-    }
-
-// Function to update orders
-    function updateOrders($selectedProducts)
-    {
-        global $orders;
-
-        // Update orders with selected products
-        foreach ($selectedProducts as $productIndex => $value) {
-            if (isset($orders[$productIndex])) {
-                $orders[$productIndex]['amount'] += 1;
-            } else {
-                $orders[$productIndex] = [
-                    'product' => $productIndex,
-                    'amount' => 1,
-                ];
-            }
-        }
-
-        // Save orders in the session
-        $_SESSION['orders'] = $orders;
-    }
 
 
 // Check if the user is updating express delivery
@@ -362,54 +346,11 @@ function handleForm($products)
             echo '- ' . $error . '<br>';
         }
         echo '</div>';
-
     }
-
-
-
-    // TODO: form related tasks (step 1)
-    //var_dump($_SERVER["REQUEST_METHOD"]);
-
-/*
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $email = htmlspecialchars($_POST["email"]);
-        $street = htmlspecialchars($_POST["street"]);
-        $streetnumber = htmlspecialchars($_POST["streetnumber"]);
-        $city = htmlspecialchars($_POST["city"]);
-        $zipcode = htmlspecialchars($_POST["zipcode"]);
-        $selectedProducts = $_POST["products"] ; // Use the correct name for the checkboxes
-
-        if (empty($email)) {
-            // Redirect or handle the error appropriately
-            header("location: ./form-view.php");
-            exit();
-        }
-
-        echo "Your order is submitted:";
-        echo "<br>";
-
-        // Get the indices of selected products
-        $selectedIndices = array_keys($selectedProducts);
-
-        // Iterate through selected indices and display corresponding product names
-        foreach ($selectedIndices as $productIndex) {
-            if (isset($products[$productIndex])) {
-                echo $products[$productIndex]['name'] . "<br>";
-            }
-        }
-        echo "<br>";
-        echo $street;
-        echo "<br>";
-        echo $streetnumber;
-        echo "<br>";
-        echo $city;
-        echo "<br>";
-        echo $zipcode;
-        echo "<br>";
-        echo $email;
 }
 
-*/
+   /* // TODO: form related tasks (step 1)
+    //var_dump($_SERVER["REQUEST_METHOD"]);
     // Validation (step 2)
     $invalidFields = validate();
     if (!empty($invalidFields)) {
@@ -418,6 +359,7 @@ function handleForm($products)
         // TODO: handle successful submission
     }
 }
+   */
 
 // TODO: replace this if by an actual check for the form to be submitted
 $formSubmitted = true;
@@ -427,3 +369,4 @@ if ($formSubmitted) {
 
 require 'form-view.php';
 ?>
+
